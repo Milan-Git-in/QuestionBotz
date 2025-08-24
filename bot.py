@@ -7,6 +7,21 @@ from dotenv import load_dotenv
 import asyncio
 import aiohttp
 from aiohttp import web
+import os
+from flask import Flask
+import threading
+
+app = Flask('')
+
+@app.route('/')
+def home():
+    return "Bot is alive!"
+
+def run():
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
+
+# Start the web server on another thread
+threading.Thread(target=run).start()
 
 # Load environment variables
 load_dotenv()
